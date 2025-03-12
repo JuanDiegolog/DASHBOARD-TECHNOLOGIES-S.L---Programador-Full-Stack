@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+
+// Cargar el bootstrap del proyecto
+$entityManager = require_once __DIR__ . '/../config/bootstrap.php';
+
+// Comandos personalizados que quieras añadir (opcional)
+$commands = [
+    // Por ejemplo: new \MiApp\Command\MiComandoPersonalizado(),
+];
+
+// Ejecutar la consola de Doctrine con nuestro EntityManager
+ConsoleRunner::run(
+    new SingleManagerProvider($entityManager),
+    $commands
+);
