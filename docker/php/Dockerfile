@@ -8,8 +8,13 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install zip pdo pdo_mysql
 
-# Habilitar mod_rewrite para Apache
+# Configurar Apache y mod_rewrite
 RUN a2enmod rewrite
+RUN echo "<Directory /var/www/html/public>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+    </Directory>" >> /etc/apache2/apache2.conf
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -23,6 +28,4 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 WORKDIR /var/www/html
 
 # Copiar archivo de configuración PHP personalizado
-COPY php.ini /usr/local/etc/php/conf.d/custom.ini 
- 
- 
+COPY php.ini /usr/local/etc/php/conf.d/custom.ini
