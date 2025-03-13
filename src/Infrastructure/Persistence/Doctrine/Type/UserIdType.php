@@ -27,9 +27,13 @@ class UserIdType extends Type
             return null;
         }
 
+        // Asegurar que tenemos un string completo
+        $value = (string) $value;
+
         try {
             return UserId::fromString($value);
         } catch (\InvalidArgumentException $e) {
+            // error_log("Error convirtiendo valor '$value' a UserId: " . $e->getMessage());
             throw ConversionException::conversionFailed($value, self::NAME);
         }
     }

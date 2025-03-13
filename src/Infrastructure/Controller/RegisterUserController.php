@@ -25,7 +25,7 @@ final class RegisterUserController
         try {
             // Validar datos de entrada
             if (!isset($requestData['name']) || !isset($requestData['email']) || !isset($requestData['password'])) {
-                return $this->errorResponse('Missing required fields', 400);
+                return $this->errorResponse('Falta alguno de los campos requeridos', 400);
             }
 
             $request = new RegisterUserRequest(
@@ -51,7 +51,7 @@ final class RegisterUserController
         } catch (UserAlreadyExistsException $e) {
             return $this->errorResponse($e->getMessage(), 409);
         } catch (\Throwable $e) {
-            return $this->errorResponse('An unexpected error occurred', 500);
+            return $this->errorResponse('Ocurrió un error inesperado', 500);
         }
     }
 

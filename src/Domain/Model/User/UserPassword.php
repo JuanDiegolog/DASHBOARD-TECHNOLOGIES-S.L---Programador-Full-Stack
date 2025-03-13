@@ -39,23 +39,23 @@ final class UserPassword
     {
         if (strlen($password) < self::MIN_LENGTH) {
             throw new WeakPasswordException(
-                sprintf('Password must be at least %d characters long', self::MIN_LENGTH)
+                sprintf('La contraseña debe tener al menos %d caracteres', self::MIN_LENGTH)
             );
         }
         
         // Verificar al menos una letra mayúscula
         if (!preg_match('/[A-Z]/', $password)) {
-            throw new WeakPasswordException('Password must contain at least one uppercase letter');
+            throw new WeakPasswordException('La contraseña debe contener al menos una letra mayúscula');
         }
         
         // Verificar al menos un número
         if (!preg_match('/[0-9]/', $password)) {
-            throw new WeakPasswordException('Password must contain at least one number');
+            throw new WeakPasswordException('La contraseña debe contener al menos un número');
         }
         
         // Verificar al menos un carácter especial
         if (!preg_match('/[^a-zA-Z0-9]/', $password)) {
-            throw new WeakPasswordException('Password must contain at least one special character');
+            throw new WeakPasswordException('La contraseña debe contener al menos un caracter especial');
         }
     }
 

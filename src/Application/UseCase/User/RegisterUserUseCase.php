@@ -32,7 +32,7 @@ final class RegisterUserUseCase
         
         // Verificar si el email ya está en uso
         if ($this->userRepository->findByEmail($email)) {
-            throw new UserAlreadyExistsException('Email already registered');
+            throw new UserAlreadyExistsException('El email ya se encuentra registrado');
         }
         
         $user = User::create(
