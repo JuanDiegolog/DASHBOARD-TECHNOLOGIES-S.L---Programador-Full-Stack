@@ -57,8 +57,15 @@ gracias por considerarme para el puesto de desarrollador full stack,aunque creo 
 git clone https://github.com/tu-usuario/sistema-registro-usuarios.git
 cd sistema-registro-usuarios
 ```
+### 2. Crear archivo .env
+crea un archivo .env en la raiz del proyecto y copia el contenido del archivo .env.example, puedes personalizar las variables de entorno segun tus preferencias.
 
-### 2. Iniciar el entorno
+```bash
+cp .env.example .env
+```
+
+
+### 3. Iniciar el entorno
 
 ```bash
 # Iniciar el entorno linux/mac
@@ -73,7 +80,7 @@ Este comando:
 - Creara y/o actualizara el esquema de la base de datos
 
 
-### 3. Realizar pruebas
+### 4. Realizar pruebas
 
 ```bash
 # Ejecutar pruebas unitarias linux/mac
@@ -82,7 +89,7 @@ make test
 # Ejecutar pruebas unitarias windows
 .\windows-commands.ps1 test
 ```
-### 4. Registrar un usuario
+### 5. Registrar un usuario
 **POST** /api/register
 **Cuerpo de la petición**:
 
