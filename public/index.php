@@ -14,6 +14,13 @@ use App\Application\EventHandler\UserRegisteredEventHandler;
 use App\Infrastructure\EventDispatcher\InMemoryEventDispatcher;
 use App\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use App\Application\UseCase\User\RegisterUserUseCase;
+use App\Infrastructure\Persistence\Doctrine\Type\UserIdType;
+use Doctrine\DBAL\Types\Type;
+
+// Registrar el tipo personalizado de Doctrine
+if (!Type::hasType(UserIdType::NAME)) {
+    Type::addType(UserIdType::NAME, UserIdType::class);
+}
 
 // Configuración Doctrine
 $paths = [__DIR__ . '/../config/doctrine'];
@@ -48,9 +55,10 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 header('Content-Type: application/json');
 
-if ($uri === '/api/register' && $method === 'POST') {
+// Manejar la ruta de registro de usuario
+if ($uri == '/api/register' && $method == 'POST') {
     $requestData = json_decode(file_get_contents('php://input'), true);
-    
+
     $response = $registerUserController($requestData);
     http_response_code($response['code']);
     echo json_encode($response);
@@ -61,6 +69,6 @@ if ($uri === '/api/register' && $method === 'POST') {
 http_response_code(404);
 echo json_encode([
     'status' => 'error',
-    'message' => 'Route not found',
+    'message' => 'Ruta no encontrada',
     'code' => 404
-]); 
+]);

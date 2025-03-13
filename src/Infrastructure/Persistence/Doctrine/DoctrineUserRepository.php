@@ -30,7 +30,7 @@ final class DoctrineUserRepository implements UserRepositoryInterface
 
     public function findById(UserId $id): ?User
     {
-        return $this->entityManager->find(User::class, $id->value());
+        return $this->entityManager->find(User::class, $id);
     }
 
     public function findByEmail(UserEmail $email): ?User
@@ -40,17 +40,17 @@ final class DoctrineUserRepository implements UserRepositoryInterface
             ->from(User::class, 'u')
             ->where('u.email.value = :email')
             ->setParameter('email', $email->value());
-            
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function delete(UserId $id): void
     {
         $user = $this->findById($id);
-        
+
         if ($user) {
             $this->entityManager->remove($user);
             $this->entityManager->flush();
         }
     }
-} 
+}

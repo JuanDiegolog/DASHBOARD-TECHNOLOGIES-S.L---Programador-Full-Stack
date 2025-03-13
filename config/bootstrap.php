@@ -31,6 +31,6 @@ $entityManager = new EntityManager($connection, $config);
 
 // Registrar el tipo en la plataforma
 $platform = $connection->getDatabasePlatform();
-$platform->registerDoctrineTypeMapping('user_id', 'user_id');
+$platform->registerDoctrineTypeMapping('user_id', UserIdType::NAME);
 
 return $entityManager;
