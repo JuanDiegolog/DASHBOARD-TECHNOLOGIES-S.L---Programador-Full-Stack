@@ -20,7 +20,9 @@
     "ramsey/uuid": "^4.7",
     "monolog/monolog": "^3.3",
     "psr/log": "^3.0",
-    "symfony/cache": "^6.2"
+    "symfony/cache": "^6.2",
+    "doctrine/migrations": "^3.5",
+    "symfony/console": "^6.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^10.0",
@@ -31,12 +33,12 @@
   },
   "scripts": {
     "test": "phpunit",
-    "migrate": "doctrine orm:schema-tool:update --force",
+    "migrate": "bin/doctrine orm:schema-tool:update --force",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:restart": "docker-compose down && docker-compose up -d",
     "docker:build": "docker-compose build",
-    "init": [
+    "setup": [
       "@docker:up",
       "@composer install",
       "@migrate"
